@@ -250,61 +250,58 @@ function unpackCompact(obj: any): LoveLetterData {
 export async function shortenUrl(longUrl: string): Promise<string> {
   if (!longUrl) return longUrl;
 
-  // 1. Try TinyURL API
+  const tinyUrlEndpoint = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`;
+
+  // 1. Direct TinyURL API call
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4000);
-    const response = await fetch(
-      `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`,
-      { signal: controller.signal }
-    );
+    const timeout = setTimeout(() => controller.abort(), 3500);
+    const response = await fetch(tinyUrlEndpoint, { signal: controller.signal });
     clearTimeout(timeout);
     if (response.ok) {
-      const short = await response.text();
-      if (short && short.trim().startsWith('http')) {
-        return short.trim();
+      const short = (await response.text()).trim();
+      if (short && short.startsWith('http')) {
+        return short;
       }
     }
   } catch (err) {
-    console.warn('TinyURL shortener failed, trying fallback:', err);
+    console.warn('Direct TinyURL API failed:', err);
   }
 
-  // 2. Try is.gd API
+  // 2. AllOrigins CORS Proxy to TinyURL API (guarantees CORS headers in browser)
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 4000);
-    const response = await fetch(
-      `https://is.gd/create.php?format=json&url=${encodeURIComponent(longUrl)}`,
-      { signal: controller.signal }
-    );
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(tinyUrlEndpoint)}`;
+    const response = await fetch(proxyUrl, { signal: controller.signal });
     clearTimeout(timeout);
     if (response.ok) {
-      const json = await response.json();
-      if (json.shorturl) {
-        return json.shorturl;
+      const short = (await response.text()).trim();
+      if (short && short.startsWith('http')) {
+        return short;
       }
     }
   } catch (err) {
-    console.warn('is.gd shortener failed:', err);
+    console.warn('AllOrigins TinyURL proxy failed:', err);
   }
 
-  // 3. Try v.gd API
+  // 3. Fallback shortener (clck.ru)
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4000);
+    const timeout = setTimeout(() => controller.abort(), 3500);
     const response = await fetch(
-      `https://v.gd/create.php?format=json&url=${encodeURIComponent(longUrl)}`,
+      `https://clck.ru/--?url=${encodeURIComponent(longUrl)}`,
       { signal: controller.signal }
     );
     clearTimeout(timeout);
     if (response.ok) {
-      const json = await response.json();
-      if (json.shorturl) {
-        return json.shorturl;
+      const short = (await response.text()).trim();
+      if (short && short.startsWith('http')) {
+        return short;
       }
     }
   } catch (err) {
-    console.warn('v.gd shortener failed:', err);
+    console.warn('clck.ru shortener failed:', err);
   }
 
   return longUrl;

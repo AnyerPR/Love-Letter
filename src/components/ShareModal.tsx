@@ -44,10 +44,20 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     };
   }, [fullShareableUrl]);
 
-  const displayLink = shortUrl || fullShareableUrl;
+  const displayLink = shortUrl || (isShortening ? 'Cargando enlace corto...' : fullShareableUrl);
 
-  const handleCopyShort = () => {
-    navigator.clipboard.writeText(displayLink);
+  const getEffectiveShortLink = async (): Promise<string> => {
+    if (shortUrl) return shortUrl;
+    setIsShortening(true);
+    const generated = await shortenUrl(fullShareableUrl);
+    setShortUrl(generated);
+    setIsShortening(false);
+    return generated;
+  };
+
+  const handleCopyShort = async () => {
+    const linkToCopy = await getEffectiveShortLink();
+    navigator.clipboard.writeText(linkToCopy);
     setCopiedShort(true);
     triggerHeartConfetti();
     setTimeout(() => setCopiedShort(false), 3000);
@@ -60,9 +70,10 @@ export const ShareModal: React.FC<ShareModalProps> = ({
     setTimeout(() => setCopiedFull(false), 3000);
   };
 
-  const handleWhatsAppShare = () => {
+  const handleWhatsAppShare = async () => {
+    const linkToShare = await getEffectiveShortLink();
     const partner = data.basicInfo.partnerName || 'Mi Amor';
-    const message = `💌 *Carta Especial para ti, ${partner}* 💖\n\nHe creado algo muy romántico e inolvidable con todo mi cariño. Toca el enlace para abrir tu sobre mágico:\n👇\n${displayLink}`;
+    const message = `💌 *Carta Especial para ti, ${partner}* 💖\n\nHe creado algo muy romántico e inolvidable con todo mi cariño. Toca el enlace para abrir tu sobre mágico:\n👇\n${linkToShare}`;
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
