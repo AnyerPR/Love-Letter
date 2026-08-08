@@ -38,15 +38,20 @@ function cleanDataForSharing(data: LoveLetterData): any {
     copy.theme = { id: copy.theme.id };
   }
 
-  // Replace base64 data URLs with lightweight romantic placeholders so URLs stay tiny
-  if (copy.basicInfo?.coverImage?.startsWith('data:')) {
-    copy.basicInfo.coverImage =
-      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80';
+  // Cover image: Keep web URLs or reasonably sized base64 images (<120KB)
+  if (copy.basicInfo?.coverImage) {
+    const cover = copy.basicInfo.coverImage;
+    if (cover.startsWith('blob:') || (cover.startsWith('data:') && cover.length > 120000)) {
+      copy.basicInfo.coverImage =
+        'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80';
+    }
   }
 
+  // Gallery photos: Keep web URLs or reasonably sized base64 images
   if (Array.isArray(copy.gallery)) {
     copy.gallery = copy.gallery.map((g: any) => {
-      if (g.url?.startsWith('data:')) {
+      const url = g.url || '';
+      if (url.startsWith('blob:') || (url.startsWith('data:') && url.length > 120000)) {
         return {
           ...g,
           url: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80',
@@ -56,9 +61,11 @@ function cleanDataForSharing(data: LoveLetterData): any {
     });
   }
 
+  // Videos: Web URLs (like YouTube/Vimeo) are kept intact.
   if (Array.isArray(copy.videos)) {
     copy.videos = copy.videos.map((v: any) => {
-      if (v.url?.startsWith('data:')) {
+      const url = v.url || '';
+      if (url.startsWith('data:') || url.startsWith('blob:')) {
         return {
           ...v,
           url: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g',
@@ -68,8 +75,12 @@ function cleanDataForSharing(data: LoveLetterData): any {
     });
   }
 
-  if (copy.audio?.url?.startsWith('data:')) {
-    copy.audio.url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+  // Audio: Web URLs or presets are kept intact.
+  if (copy.audio?.url) {
+    const url = copy.audio.url;
+    if (url.startsWith('data:') || url.startsWith('blob:')) {
+      copy.audio.url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+    }
   }
 
   return copy;

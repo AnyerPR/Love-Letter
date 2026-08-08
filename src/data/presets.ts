@@ -75,22 +75,28 @@ export const THEMES: Record<string, ThemeConfig> = {
 
 export const PRESET_AUDIOS = [
   {
-    id: 'piano-romance',
-    title: 'Melodía de Piano y Violín',
-    artist: 'Love Serenade Orchestral',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    id: 'chopin-nocturne',
+    title: 'Nocturno N°2 en Mi Bemol',
+    artist: 'Frédéric Chopin (Piano Solo)',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Nocturne_in_E_flat_major%2C_Op._9_no._2.mp3',
   },
   {
-    id: 'acoustic-sunset',
-    title: 'Atardecer Acústico',
-    artist: 'Sweet Acoustic Guitars',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    id: 'romantic-relaxing-piano',
+    title: 'Melodía Suave de Piano',
+    artist: 'Piano Acústico Romántico',
+    url: 'https://archive.org/download/piano-romantic-music/Relaxing%20Piano%20Soft%20Music%20Relaxation.mp3',
   },
   {
-    id: 'lofi-heartbeats',
-    title: 'Noche Tranquila & Lofi Beats',
-    artist: 'Cosy Chillout',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
+    id: 'peaceful-piano-love',
+    title: 'Paz & Amor (Piano Dulce)',
+    artist: 'Serenata de Piano',
+    url: 'https://archive.org/download/piano-romantic-music/Piano%20Romantic%20Music.mp3',
+  },
+  {
+    id: 'live-romantic-synth',
+    title: 'Caja de Música Mágica',
+    artist: 'Sintetizador Vivo (100% Garantizado)',
+    url: 'synth',
   },
 ];
 
@@ -156,10 +162,10 @@ Te amo hoy, mañana y para siempre.`,
   ],
   audio: {
     sourceType: 'preset',
-    presetId: 'piano-romance',
-    title: 'Melodía de Piano y Violín',
-    artist: 'Love Serenade Orchestral',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    presetId: 'chopin-nocturne',
+    title: 'Nocturno en Mib Mayor (Piano Suave)',
+    artist: 'Frédéric Chopin (Piano Solo)',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Nocturne_in_E_flat_major%2C_Op._9_no._2.mp3',
     autoPlay: false,
   },
   quotes: [

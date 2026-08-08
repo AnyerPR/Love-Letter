@@ -164,6 +164,10 @@ export const ShareModal: React.FC<ShareModalProps> = ({
             </button>
           </div>
 
+          <p className="text-[11px] text-rose-200/80 mt-2.5">
+            ✨ Tus fotos y textos personalizados han sido empaquetados en el enlace para que tu pareja abra su sobre mágico directamente en cualquier teléfono.
+          </p>
+
           {/* Expandable option for full direct technical link */}
           <div className="mt-3">
             <button

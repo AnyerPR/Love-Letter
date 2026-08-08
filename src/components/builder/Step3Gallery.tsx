@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PhotoItem } from '../../types';
-import { Camera, Plus, Trash2, ArrowUp, ArrowDown, Upload, Link as LinkIcon } from 'lucide-react';
+import { Camera, Plus, Trash2, ArrowUp, ArrowDown, Upload, Link as LinkIcon, Loader2 } from 'lucide-react';
+import { compressImageFile } from '../../utils/imageCompressor';
 
 interface Step3Props {
   photos: PhotoItem[];
@@ -11,6 +12,7 @@ export const Step3Gallery: React.FC<Step3Props> = ({ photos, onChange }) => {
   const [newUrl, setNewUrl] = useState<string>('');
   const [newCaption, setNewCaption] = useState<string>('');
   const [newDate, setNewDate] = useState<string>('');
+  const [isCompressing, setIsCompressing] = useState<boolean>(false);
 
   const handleAddPhoto = () => {
     if (!newUrl) return;
@@ -26,23 +28,28 @@ export const Step3Gallery: React.FC<Step3Props> = ({ photos, onChange }) => {
     setNewDate('');
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const dataUrl = event.target?.result as string;
+
+    try {
+      setIsCompressing(true);
+      const compressedDataUrl = await compressImageFile(file, 480, 0.5);
       const item: PhotoItem = {
         id: 'photo-' + Date.now(),
-        url: dataUrl,
+        url: compressedDataUrl,
         caption: newCaption || file.name,
         date: newDate,
       };
       onChange([...photos, item]);
       setNewCaption('');
       setNewDate('');
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.error('Error compressing image:', err);
+    } finally {
+      setIsCompressing(false);
+      if (e.target) e.target.value = '';
+    }
   };
 
   const handleDelete = (id: string) => {
@@ -89,6 +96,14 @@ export const Step3Gallery: React.FC<Step3Props> = ({ photos, onChange }) => {
             <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
           </label>
         </div>
+
+        {/* Uploading/compressing spinner */}
+        {isCompressing && (
+          <div className="p-3 rounded-xl bg-slate-950 border border-rose-500/30 flex items-center justify-center gap-2 text-rose-300 animate-pulse text-xs">
+            <Loader2 className="w-4 h-4 animate-spin text-rose-400" />
+            <span>Optimizando foto para el enlace de compartir...</span>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <input

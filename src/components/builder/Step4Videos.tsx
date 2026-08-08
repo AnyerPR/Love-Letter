@@ -82,7 +82,10 @@ export const Step4Videos: React.FC<Step4Props> = ({ videos, onChange }) => {
           Paso 4: Vídeos Especiales
         </h3>
         <p className="text-xs text-rose-200/70">
-          Agrega vídeos desde la galería de tu dispositivo o pega enlaces de YouTube para revivir recuerdos en movimiento.
+          Agrega vídeos desde tu dispositivo o enlaces de YouTube para revivir recuerdos en movimiento.
+        </p>
+        <p className="text-[11px] text-amber-300/90 bg-amber-950/40 border border-amber-500/30 p-2.5 rounded-xl mt-2 font-medium">
+          💡 <strong>Nota para compartir:</strong> Los vídeos agregados con enlaces de YouTube o enlaces web se reproducen en cualquier teléfono.
         </p>
       </div>
 
@@ -192,7 +195,7 @@ export const Step4Videos: React.FC<Step4Props> = ({ videos, onChange }) => {
             <div className="aspect-video w-full rounded-xl overflow-hidden bg-slate-950 border border-slate-800/80 relative">
               {isYouTubeUrl(v.url) ? (
                 <iframe
-                  src={getYouTubeEmbedUrl(v.url)}
+                  src={getYouTubeEmbedUrl(v.url) || undefined}
                   title={v.title}
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -200,7 +203,7 @@ export const Step4Videos: React.FC<Step4Props> = ({ videos, onChange }) => {
                 />
               ) : (
                 <video
-                  src={v.url}
+                  src={v.url || undefined}
                   controls
                   preload="metadata"
                   playsInline

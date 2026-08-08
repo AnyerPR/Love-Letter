@@ -12,10 +12,11 @@ export const VideoSection: React.FC<VideoSectionProps> = ({ videos, theme }) => 
 
   if (!videos || videos.length === 0) return null;
 
-  const isYouTubeUrl = (url: string) =>
-    url.includes('youtube.com') || url.includes('youtu.be');
+  const isYouTubeUrl = (url?: string) =>
+    Boolean(url) && (url!.includes('youtube.com') || url!.includes('youtu.be'));
 
-  const getYouTubeEmbedUrl = (url: string) => {
+  const getYouTubeEmbedUrl = (url?: string) => {
+    if (!url) return '';
     if (url.includes('embed/')) return url;
     let videoId = '';
     if (url.includes('v=')) {
@@ -70,7 +71,7 @@ export const VideoSection: React.FC<VideoSectionProps> = ({ videos, theme }) => 
                   </div>
                 ) : isYt ? (
                   <iframe
-                    src={getYouTubeEmbedUrl(vid.url)}
+                    src={getYouTubeEmbedUrl(vid.url) || undefined}
                     title={vid.title}
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -78,7 +79,7 @@ export const VideoSection: React.FC<VideoSectionProps> = ({ videos, theme }) => 
                   />
                 ) : (
                   <video
-                    src={vid.url}
+                    src={vid.url || undefined}
                     controls
                     className="w-full h-full object-cover"
                     onError={() => handleVideoError(vid.id)}

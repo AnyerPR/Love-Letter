@@ -52,7 +52,10 @@ export const Step5Music: React.FC<Step5Props> = ({ data, onChange }) => {
           Paso 5: Música de Fondo
         </h3>
         <p className="text-xs text-rose-200/70">
-          Selecciona una melodía romántica o sube tu propia canción especial.
+          Selecciona una melodía romántica o ingresa tu canción especial.
+        </p>
+        <p className="text-[11px] text-amber-300/90 bg-amber-950/40 border border-amber-500/30 p-2.5 rounded-xl mt-2 font-medium">
+          💡 <strong>Nota para compartir:</strong> Las melodías incluidas en la app o enlaces de audio web (MP3) son las recomendadas para sonar automáticamente al enviar el enlace a tu pareja.
         </p>
       </div>
 
@@ -61,7 +64,7 @@ export const Step5Music: React.FC<Step5Props> = ({ data, onChange }) => {
         <label className="block text-xs font-semibold text-rose-200 mb-2">
           Melodías Románticas Incluidas
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {PRESET_AUDIOS.map((preset) => {
             const isSelected = data.url === preset.url;
             return (
