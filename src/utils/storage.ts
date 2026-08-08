@@ -272,13 +272,16 @@ export async function shortenUrl(longUrl: string): Promise<string> {
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 4000);
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(tinyUrlEndpoint)}`;
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(tinyUrlEndpoint)}`;
     const response = await fetch(proxyUrl, { signal: controller.signal });
     clearTimeout(timeout);
     if (response.ok) {
-      const short = (await response.text()).trim();
-      if (short && short.startsWith('http')) {
-        return short;
+      const data = await response.json();
+      if (data && typeof data.contents === 'string') {
+        const short = data.contents.trim();
+        if (short && short.startsWith('http')) {
+          return short;
+        }
       }
     }
   } catch (err) {
