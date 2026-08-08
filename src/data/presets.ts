@@ -1,0 +1,272 @@
+import { LoveLetterData, ThemeConfig } from '../types';
+
+export const THEMES: Record<string, ThemeConfig> = {
+  'rose-gold': {
+    id: 'rose-gold',
+    name: 'Rose Gold & Champagne',
+    bgGradient: 'from-rose-950 via-pink-900 to-rose-900',
+    cardBg: 'bg-white/10 backdrop-blur-xl',
+    cardBorder: 'border-rose-300/20 shadow-rose-900/40',
+    accentColor: 'text-rose-300',
+    accentBg: 'bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/30',
+    textColor: 'text-rose-50',
+    mutedText: 'text-rose-200/70',
+    fontFamily: 'serif-elegant',
+    particles: 'hearts',
+    heroOverlay: 'bg-gradient-to-t from-rose-950 via-rose-950/60 to-transparent',
+  },
+  'midnight-romance': {
+    id: 'midnight-romance',
+    name: 'Noche Estrellada (Midnight)',
+    bgGradient: 'from-slate-950 via-indigo-950 to-purple-950',
+    cardBg: 'bg-slate-900/40 backdrop-blur-xl',
+    cardBorder: 'border-indigo-400/20 shadow-indigo-950/50',
+    accentColor: 'text-indigo-300',
+    accentBg: 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-500/30',
+    textColor: 'text-slate-100',
+    mutedText: 'text-indigo-200/70',
+    fontFamily: 'classic-cinzel',
+    particles: 'sparkles',
+    heroOverlay: 'bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent',
+  },
+  'pastel-sunset': {
+    id: 'pastel-sunset',
+    name: 'Atardecer Dorado (Sunset)',
+    bgGradient: 'from-amber-950 via-rose-950 to-orange-950',
+    cardBg: 'bg-amber-950/30 backdrop-blur-xl',
+    cardBorder: 'border-amber-300/20 shadow-amber-950/40',
+    accentColor: 'text-amber-300',
+    accentBg: 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-medium shadow-amber-500/30',
+    textColor: 'text-amber-50',
+    mutedText: 'text-amber-200/70',
+    fontFamily: 'romantic-script',
+    particles: 'petals',
+    heroOverlay: 'bg-gradient-to-t from-amber-950 via-amber-950/60 to-transparent',
+  },
+  'emerald-passion': {
+    id: 'emerald-passion',
+    name: 'Esmeralda & Oro',
+    bgGradient: 'from-emerald-950 via-teal-950 to-slate-950',
+    cardBg: 'bg-emerald-900/20 backdrop-blur-xl',
+    cardBorder: 'border-emerald-300/20 shadow-emerald-950/40',
+    accentColor: 'text-emerald-300',
+    accentBg: 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/30',
+    textColor: 'text-emerald-50',
+    mutedText: 'text-emerald-200/70',
+    fontFamily: 'serif-elegant',
+    particles: 'glow',
+    heroOverlay: 'bg-gradient-to-t from-emerald-950 via-emerald-950/60 to-transparent',
+  },
+  'classic-crimson': {
+    id: 'classic-crimson',
+    name: 'Rojo Pasión Clásico',
+    bgGradient: 'from-red-950 via-rose-950 to-neutral-950',
+    cardBg: 'bg-red-950/30 backdrop-blur-xl',
+    cardBorder: 'border-red-400/20 shadow-red-950/50',
+    accentColor: 'text-red-400',
+    accentBg: 'bg-red-600 hover:bg-red-700 text-white shadow-red-600/30',
+    textColor: 'text-red-50',
+    mutedText: 'text-red-200/70',
+    fontFamily: 'romantic-script',
+    particles: 'hearts',
+    heroOverlay: 'bg-gradient-to-t from-red-950 via-red-950/60 to-transparent',
+  },
+};
+
+export const PRESET_AUDIOS = [
+  {
+    id: 'piano-romance',
+    title: 'Melodía de Piano y Violín',
+    artist: 'Love Serenade Orchestral',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+  },
+  {
+    id: 'acoustic-sunset',
+    title: 'Atardecer Acústico',
+    artist: 'Sweet Acoustic Guitars',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+  },
+  {
+    id: 'lofi-heartbeats',
+    title: 'Noche Tranquila & Lofi Beats',
+    artist: 'Cosy Chillout',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
+  },
+];
+
+export const INITIAL_DEFAULT_LETTER: LoveLetterData = {
+  id: 'preset-anniversary',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  basicInfo: {
+    creatorName: 'Mateo',
+    partnerName: 'Sofía',
+    startDate: '2023-02-14T18:30',
+    title: 'Nuestra Historia de Amor',
+    subtitle: 'Un pequeño rincón digital dedicado a la persona que ilumina cada uno de mis días ❤️',
+    coverImage: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1600&auto=format&fit=crop',
+  },
+  letter: {
+    text: `Querida Sofía,
+
+Desde el primer instante en que nuestras miradas se cruzaron, supe que mi vida nunca volvería a ser la misma. Cada risa compartida, cada mirada complice en medio de la multitud y cada abrazo sincero han construido la historia más hermosa que jamás imaginé vivir.
+
+Gracias por enseñarme lo que significa amar con calma, con ternura y sin reservas. Gracias por ser mi refugio en los días grises y mi mayor motivo para celebrar en los días soleados.
+
+Esta carta digital es solo un pequeño reflejo de todo lo que siento por ti. No alcanza el tiempo ni las palabras para expresar la gratitud infinita de caminar a tu lado.
+
+Te amo hoy, mañana y para siempre.`,
+    typewriterSpeed: 'medium',
+    paperStyle: 'cream',
+    signature: 'Con todo mi amor, Mateo ❤️',
+  },
+  gallery: [
+    {
+      id: 'photo-1',
+      url: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200&auto=format&fit=crop',
+      caption: 'Nuestra primera escapada a la playa al atardecer 🌅',
+      date: '15 de Julio, 2023',
+    },
+    {
+      id: 'photo-2',
+      url: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop',
+      caption: 'Aquella tarde inolvidable caminando entre las luces de la ciudad ✨',
+      date: '24 de Diciembre, 2023',
+    },
+    {
+      id: 'photo-3',
+      url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop',
+      caption: 'Risas espontáneas que se convirtieron en mi recuerdo favorito 📸',
+      date: '10 de Marzo, 2024',
+    },
+    {
+      id: 'photo-4',
+      url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop',
+      caption: 'Celebrando juntos nuestro primer aniversario 🎉❤️',
+      date: '14 de Febrero, 2024',
+    },
+  ],
+  videos: [
+    {
+      id: 'vid-1',
+      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Sample embedded structure or custom direct video
+      title: 'Nuestro video del viaje a las montañas 🏔️',
+      description: 'Un momento capturado entre risas y frío del bosque.',
+    },
+  ],
+  audio: {
+    sourceType: 'preset',
+    presetId: 'piano-romance',
+    title: 'Melodía de Piano y Violín',
+    artist: 'Love Serenade Orchestral',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    autoPlay: false,
+  },
+  quotes: [
+    {
+      id: 'q-1',
+      quote: 'Eres mi lugar favorito cuando el mundo se vuelve ruidoso.',
+      category: 'Refugio',
+    },
+    {
+      id: 'q-2',
+      quote: 'Te elegiría a ti en cien vidas, en cien mundos, en cualquier versión de la realidad.',
+      author: 'Tu chico favorito',
+    },
+    {
+      id: 'q-3',
+      quote: 'El mejor estado civil es estar juntos.',
+      category: 'Complicidad',
+    },
+  ],
+  vouchers: [
+    {
+      id: 'v-1',
+      title: 'Cena Romántica Hecha en Casa',
+      description: 'Válido para una cena de 3 tiempos preparada especialmente para ti con tu platillo preferido y tu postre favorito.',
+      emoji: '🍕',
+      color: 'from-amber-500 to-rose-600',
+      redeemed: false,
+    },
+    {
+      id: 'v-2',
+      title: 'Masaje Relajante de 30 Minutos',
+      description: 'Válido para un masaje antiestrés completo con aceites aromáticos y música relajante.',
+      emoji: '💆',
+      color: 'from-pink-500 to-purple-600',
+      redeemed: false,
+    },
+    {
+      id: 'v-3',
+      title: 'Maratón de Películas & Palomitas',
+      description: 'Tú eliges la película, la serie y los snacks. Cero discusiones por el control remoto.',
+      emoji: '🎬',
+      color: 'from-indigo-500 to-blue-600',
+      redeemed: false,
+    },
+    {
+      id: 'v-4',
+      title: 'Escapada Sorpresa de Fin de Semana',
+      description: 'Prepara las maletas. Un viaje inolvidable para reconectar y crear nuevos recuerdos.',
+      emoji: '✈️',
+      color: 'from-emerald-500 to-teal-600',
+      redeemed: false,
+    },
+    {
+      id: 'v-5',
+      title: 'Perdón Incondicional',
+      description: 'Vale un abrazo enorme y la resolución inmediata de cualquier pequeña diferencia.',
+      emoji: '🕊️',
+      color: 'from-rose-400 to-pink-600',
+      redeemed: false,
+    },
+  ],
+  timeline: [
+    {
+      id: 'tl-1',
+      title: 'El Primer Encuentro',
+      date: '10 de Enero, 2023',
+      description: 'Coincidimos en aquel café del centro. Bastó una sola conversación para saber que eras alguien especial.',
+      iconName: 'Coffee',
+    },
+    {
+      id: 'tl-2',
+      title: 'Nuestra Primera Cita',
+      date: '28 de Enero, 2023',
+      description: 'Paseamos durante horas bajo la lluvia suave. Nadie quería que la noche terminara.',
+      iconName: 'HeartHandshake',
+    },
+    {
+      id: 'tl-3',
+      title: 'El Primer Beso',
+      date: '14 de Febrero, 2023',
+      description: 'Bajo el farol de la plaza principal. El tiempo se detuvo por completo.',
+      iconName: 'Sparkles',
+    },
+    {
+      id: 'tl-4',
+      title: 'Comenzamos Oficialmente',
+      date: '14 de Febrero, 2023',
+      description: 'Prometimos cuidar el uno del otro y construir una historia hermosa día a día.',
+      iconName: 'Heart',
+    },
+    {
+      id: 'tl-5',
+      title: 'Nuestro Primer Viaje Juntos',
+      date: '18 de Agosto, 2023',
+      description: 'Descubrimos lugares mágicos y nos tomamos las mejores fotografías.',
+      iconName: 'MapPin',
+    },
+  ],
+  reasons: [
+    { id: 'r-1', number: 1, reason: 'Por la forma en que tus ojos brillan cuando sonríes de verdad.' },
+    { id: 'r-2', number: 2, reason: 'Porque tus abrazos hacen que cualquier día difícil desaparezca al instante.' },
+    { id: 'r-3', number: 3, reason: 'Por tu amabilidad infinita con todas las personas a tu alrededor.' },
+    { id: 'r-4', number: 4, reason: 'Por cómo cantas en el auto aunque no te sepas bien la letra.' },
+    { id: 'r-5', number: 5, reason: 'Porque me haces querer ser una mejor persona cada día.' },
+    { id: 'r-6', number: 6, reason: 'Por la paz que siento cuando estamos tomados de la mano.' },
+    { id: 'r-7', number: 7, reason: 'Por tu paciencia y por saber escucharme siempre.' },
+    { id: 'r-8', number: 8, reason: 'Porque eres mi mejor amiga, mi confidente y el amor de mi vida.' },
+  ],
+  theme: THEMES['rose-gold'],
+};

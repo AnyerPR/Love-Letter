@@ -1,0 +1,6 @@
+{
+  "name": "Love Letter",
+  "description": "Creador y visualizador de cartas y experiencias digitales románticas personalizadas con animaciones, música, galería y vales interactivos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
